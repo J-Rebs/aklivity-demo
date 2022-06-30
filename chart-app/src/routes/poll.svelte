@@ -1,5 +1,17 @@
 <script>
     import RangeSlider from "svelte-range-slider-pips";
+    
+    let caffeination = [0];
+    let cVal = 0;
+
+    let taste = [0];
+    let tVal = 0; 
+    
+    console.log('updates')
+
+    function handleClick(){
+
+    }
 
 </script>
 
@@ -8,19 +20,25 @@
     <h1>Coffee Appreciation Poll!</h1>
     <h2>Caffeination</h2>
     <RangeSlider
-    values={[0]}
-    range = {[0,100]}
+    values = {caffeination}
     pips = {true}
     all='label'
+    on:change={(e) => {cVal=e.detail.value}}
     />
     <h2>Taste</h2>
-    <RangeSlider
-    values={[0]}
-    range = {[0,100]}
+    <RangeSlider values = {taste}
     pips = {true}
     all='label'
+    on:change={(e) => {tVal=e.detail.value}}
     />
-    
+
+    <h2>Your current views are...</h2>
+    <p>
+        caffeination:{cVal}
+    </p>
+    <p>
+        taste:{tVal}
+    </p>
     <button>Register my views</button>
 
     <h5>
