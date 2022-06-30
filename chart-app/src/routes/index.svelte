@@ -16,7 +16,6 @@
     import { LayerCake, Svg } from "layercake";
     import { onMount } from "svelte";
     import { writable } from "svelte/store";
-
     /**
      * Subscription function: Copied from:https://marmelab.com/blog/2020/10/02/build-a-chat-application-using-sveltejs-and-sse.html
      * Modifications added.
@@ -63,7 +62,9 @@
      * Need to add the necessary method so that slider info is logged 
      * into data stream on button click -- will do this with a post method
     */
-
+    let caffeination = 0;
+    let taste = 0;
+    let theme = 'default';
     $: console.log(data);
 
 </script>
@@ -87,6 +88,12 @@
         entirely useful...anyways take the poll! Keep this tab open to view your
         data being added live!
     </p>
+
+    <h5>
+        <a href="/poll">Take the poll!</a>
+    </h5>
+
+    
 </main>
 
 <style>
