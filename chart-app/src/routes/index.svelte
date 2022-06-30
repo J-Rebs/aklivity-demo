@@ -54,7 +54,7 @@
             data = incomingData;
         });
 
-
+        
         return store.close;
     });
 
@@ -66,6 +66,7 @@
     let taste = 0;
     let theme = 'default';
     $: console.log(data);
+    $: data.forEach((e) =>{console.log(JSON.parse(e['name']))});
 
 </script>
 

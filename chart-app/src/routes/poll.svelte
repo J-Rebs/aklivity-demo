@@ -8,7 +8,7 @@
     let tVal = 0;
 
     /**
-     * With Zilla, we can mix and match protocols.
+     * With Zilla, we can mix and match protocols with.
      * We use SSE to help keep our poll data up to date, 
      * but new data can be registered with a simple HTTP Post. 
      * Info on how to post with fetch:
