@@ -2,7 +2,7 @@ This reposistory is a work in progress. It will be noted when it is complete her
 
 This is a demo app for Aklivity Zilla built on top of the example todo service from Aklivity to create a secondary chart-app that allows realtime rendering of poll data.
 
-The todo app and todo service come directly from Aklivity's demo. You can find it [here](https://docs.aklivity.io/zilla/get-started/build-todo-app)
+The todo app and todo service come directly from Aklivity's demo. You can find it [here](https://docs.aklivity.io/zilla/get-started/build-todo-app).
 
 Comments are included throughout the Svelte 'chart-app' to help understand how Zilla helps make deploying applications using the power of Apache Kafka easier. 
 
