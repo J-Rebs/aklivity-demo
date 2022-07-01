@@ -1,8 +1,7 @@
 <script>
     /**
      * This Svelte app is created to demo how Aklivity Zilla can be used to quickly
-     * [1] serve a webb app on an http server
-     * [2] update data across the app in realtime using Apache Kafka, HTTP, and SSE
+     * update data across the app in realtime using Apache Kafka, HTTP, and SSE.
      *
      * Rather than worrying about setting up a Flask Server, integrating it with Kafka,
      * then figuring out how to integrate SSEs to produce an app with live updates,
@@ -13,14 +12,13 @@
      * With Zilla, piping data streams is almost like working on a Unix Command Line.
      * Focus on what you want to do at point A and point B, not how to get from A to B.
      */
-    import { LayerCake, Svg } from "layercake";
     import { onMount } from "svelte";
     import { writable } from "svelte/store";
     /**
      * Subscription function: Copied from:https://marmelab.com/blog/2020/10/02/build-a-chat-application-using-sveltejs-and-sse.html
      * Modifications added.
-     * 
-     * Note because of Zilla we can take advantage of SSEs easily to retrieve data in real time. 
+     *
+     * Note because of Zilla we can take advantage of SSEs easily to retrieve data in real time.
      * Convientely, we can still use a post HTTP method to send data into the stream too, which we'll
      * demo below.
      */
@@ -36,7 +34,6 @@
          */
         eventSource.onmessage = (e) => {
             update((data) => data.concat(JSON.parse(e.data)));
-           
         };
 
         return {
@@ -47,40 +44,62 @@
     };
 
     let data = [];
+    let chartDataCount = 0;
+    let chartData = [];
     let poll = null;
     let sourceURl = "http://localhost:8080/tasks";
     onMount(async () => {
         /*
-         * Retreive data live 
+         * Retreive data live
          */
         const store = createChannelStore(sourceURl);
         store.subscribe((incomingData) => {
             data = incomingData;
         });
         /*
-         * Cache the poll page so it loads properly  
-         * Prototype: https://sustainablewww.org/principles/how-to-implement-routes-in-your-svelte-web-application-using-svelte-routing 
+         * Cache the poll page so it loads properly
+         * Prototype: https://sustainablewww.org/principles/how-to-implement-routes-in-your-svelte-web-application-using-svelte-routing
          */
-        try{
-            poll = (await import ("./poll.svelte")).default;
-        }
-        catch(e){
-            poll = 404; 
+        try {
+            poll = (await import("./poll.svelte")).default;
+        } catch (e) {
+            poll = 404;
         }
         return store.close;
     });
 
     /**
-     * Need to add the necessary method so that slider info is logged 
+     * Need to add the necessary method so that slider info is logged
      * into data stream on button click -- will do this with a post method
-    */
-    let caffeination = 0;
-    let taste = 0;
-    let theme = 'default';
-    console.log('homepage is reached');
-    $: console.log(data);
-    $: data.forEach((e) =>{console.log(JSON.parse(e['name']))});
+     */
 
+    let theme = "default";
+    $: data.forEach((e) => {
+        chartData.push(JSON.parse(e["name"]));
+        console.log(chartData);
+        chartDataCount += 1;
+    });
+
+    
+    
+
+    /**
+     * The below relates to the layer cake scatter plot we are generating.
+     * Source: https://layercake.graphics/example/ScatterWebgl
+     */
+
+    import { LayerCake, Svg, WebGL, Html } from "layercake";
+
+    import ScatterWebGL from "./components/Scatter.webgl.svelte";
+    import AxisX from "./components/AxisX.svelte";
+    import AxisY from "./components/AxisY.svelte";
+    import QuadTree from "./components/QuadTree.html.svelte";
+
+    const xKey = 'taste';
+    const yKey = 'caffeination';
+
+    const r = 3;
+    const padding = 6;
 </script>
 
 <main>
@@ -92,10 +111,10 @@
     />
     <h3>What's this page for?</h3>
     <p>
-        We are trying to answer an important question. To
-        what degree do people appreciate coffee for its flavor versus its
-        caffeination. Click on the "Take the poll!" button below to add your
-        feedback on why you appreciate coffee.<br />
+        We are trying to answer an important question. To what degree do people
+        appreciate coffee for its flavor versus its caffeination. Click on the
+        "Take the poll!" button below to add your feedback on why you appreciate
+        coffee.<br />
         <br />
         Keep this tab open to view your data being added live!
     </p>
@@ -103,10 +122,45 @@
     <h5>
         <a href="/poll">Take the poll!</a>
     </h5>
-
-    
 </main>
-
+{#key chartDataCount}
+<div class="chart-container">
+    <LayerCake
+      padding={{ top: 0, right: 5, bottom: 20, left: 25 }}
+      x={xKey}
+      y={yKey}
+      xPadding={[padding, padding]}
+      yPadding={[padding, padding]}
+      data={chartData}
+    >
+      <Svg>
+        <AxisX/>
+        <AxisY
+          ticks={5}
+        />
+      </Svg>
+  
+      <WebGL>
+        <ScatterWebGL
+          {r}
+        />
+      </WebGL>
+  
+      <Html>
+        <QuadTree
+          let:x
+          let:y
+          let:visible
+        >
+          <div
+            class="circle"
+            style="top:{y}px;left:{x}px;display: { visible ? 'block' : 'none' };"
+          ></div>
+        </QuadTree>
+      </Html>
+    </LayerCake>
+  </div>
+{/key}
 <style>
     main {
         align-items: center;
@@ -128,4 +182,19 @@
         margin-right: auto;
         width: 50%;
     }
+
+  .chart-container {
+    width: 100%;
+    height: 500px;
+  }
+  .circle {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(171,0, 214);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    width: 10px;
+    height: 10px;
+  }
+
 </style>
