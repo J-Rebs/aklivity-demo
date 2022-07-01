@@ -13,4 +13,4 @@ kind of like the first time you learned how to use pipes on a command line inter
 
 # Vercel Deployment
 
-The app is deployed on Vercel: https://aklivity-demo.vercel.app/. You will need to be running the proper Zilla stack on local host for functionality to work with the site, however. 
+Pending.
