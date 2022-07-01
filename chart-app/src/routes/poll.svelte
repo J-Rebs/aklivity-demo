@@ -67,7 +67,7 @@
     <button on:click={register}>Register your views</button>
 
     <h5>
-        <a href="/">Go home (to the homepage that is)</a>
+        <a href="/">Go to homepage</a>
     </h5>
 </main>
 

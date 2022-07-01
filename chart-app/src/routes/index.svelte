@@ -47,14 +47,26 @@
     };
 
     let data = [];
+    let poll = null;
     let sourceURl = "http://localhost:8080/tasks";
-    onMount(() => {
+    onMount(async () => {
+        /*
+         * Retreive data live 
+         */
         const store = createChannelStore(sourceURl);
         store.subscribe((incomingData) => {
             data = incomingData;
         });
-
-        
+        /*
+         * Cache the poll page so it loads properly  
+         * Prototype: https://sustainablewww.org/principles/how-to-implement-routes-in-your-svelte-web-application-using-svelte-routing 
+         */
+        try{
+            poll = (await import ("./poll.svelte")).default;
+        }
+        catch(e){
+            poll = 404; 
+        }
         return store.close;
     });
 
@@ -65,6 +77,7 @@
     let caffeination = 0;
     let taste = 0;
     let theme = 'default';
+    console.log('homepage is reached');
     $: console.log(data);
     $: data.forEach((e) =>{console.log(JSON.parse(e['name']))});
 
@@ -77,17 +90,14 @@
         src="https://openmoji.org/data/color/svg/E151.svg"
         alt="coffee<3"
     />
-    <h3>What is this page for besides displaying open source emoji?</h3>
+    <h3>What's this page for?</h3>
     <p>
-        Well, not much, except we are trying to answer an important question. To
+        We are trying to answer an important question. To
         what degree do people appreciate coffee for its flavor versus its
-        caffeination.Click on the "Take the poll!" button below to add your
+        caffeination. Click on the "Take the poll!" button below to add your
         feedback on why you appreciate coffee.<br />
         <br />
-        You certainly could fill it out even if you don't like coffee, but then you
-        would just be submitting 0 in all the requested fields. That would seem not
-        entirely useful...anyways take the poll! Keep this tab open to view your
-        data being added live!
+        Keep this tab open to view your data being added live!
     </p>
 
     <h5>
