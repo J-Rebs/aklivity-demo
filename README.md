@@ -15,7 +15,7 @@ Read a short blog post about the chart-app here: [pending]
 
 # Vercel Deployment
 
-You can test the application yourself. Build and ensure the todo app from aklivity is running on your computer (make sure you do the app without authentication security added). 
+You can test the application yourself. Build and ensure the todo app from Aklivity is running on your computer (make sure you do the app without authentication security added). 
 
 Then you can visit this webpage [app](https://aklivity-chartdemo-deploy.vercel.app/). If all is done correctly, you should be able to fill out the poll page with responses and watch your chart populate live. 
 
