@@ -1,4 +1,4 @@
-# About this Coffee Appreciation Poll demo for Aklivity ZIlla
+# About this Coffee Appreciation Poll demo for Aklivity Zilla
 
 If you have worked on a UNIX based system before, you can probably remember the first time you learned to use piping to redirect inputs and outputs between files and programs. It enabled modular programs that focused on small tasks which could then be chained together to complete more complex objectives. Piping within a command line for an operating system saves time and enforces separation of concerns (i.e., modularity) in developing a software system. Aklivity Zilla brings the same idea of piping to the age of event streaming and real time updates.
 
