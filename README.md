@@ -6,7 +6,7 @@ Suppose you wanted to make a Coffee Appreciation Poll application as a website w
 
 Well, you might want to use server-side events to ensure real time updates to the poll chart, and you would need something like an Apache Kafka cluster running in the background to log user feedback. You also need a way to send information to the cluster, maybe something like a POST method if you are building a web application. Without Zilla, you would need to separately build integrations from the server-side events and the REST API back into your Kafka cluster.
 
-Zilla removes this concern. Using a simple JSON, you can stack different bindings with everything from http and related file system servers to server-side-event servers and Kafka clusters. All you have to do is specify when to enter and exit each type of server. In short, you need to pipe your data streams. This lets you focus on how data should be manipulated rather than worrying about how to move data. In the same way as piping and modular programming improved working on desktop operating systems, Zilla improves programming in an era of real time data streams. 
+Zilla removes this concern. Using a simple JSON, you can stack different bindings with everything from http and related file system servers to server-side-event servers and Kafka clusters. All you have to do is specify when to enter and exit each type of server or client. In short, you need to pipe your data streams. This lets you focus on how data should be manipulated rather than worrying about how to move data. In the same way as piping and modular programming improved working on desktop operating systems, Zilla improves programming in an era of real time data streams. 
 
 
 # Try out the application
