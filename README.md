@@ -1,6 +1,6 @@
 # About this Coffee Appreciation Poll demo for Aklivity ZIlla
 
-If you have worked on a UNIX based system before, you can probably remember the first time you learned to use piping to redirect inputs and outputs between files and programs. It enabled modular programs that focused on small tasks which could then be chained together to complete more complex tests. Piping within a command line for an operating system saves time and enforces separation of concerns (i.e., modularity) in developing a software system. Aklivity Zilla brings the same idea of piping to the age of event streaming and real time updates.
+If you have worked on a UNIX based system before, you can probably remember the first time you learned to use piping to redirect inputs and outputs between files and programs. It enabled modular programs that focused on small tasks which could then be chained together to complete more complex objectives. Piping within a command line for an operating system saves time and enforces separation of concerns (i.e., modularity) in developing a software system. Aklivity Zilla brings the same idea of piping to the age of event streaming and real time updates.
 
 Suppose you wanted to make a Coffee Appreciation Poll application as a website where a user could use sliders to give feedback on the reasons they appreciate coffee on one page. On a separate page, user feedback would populate in real time allowing the poll maker to get an up-to-date understanding of user sentiments. How would you build it? 
 
